@@ -15,6 +15,6 @@ Pagina web para descarga de Peliculas y Series
 
 ## Integrantes
 
-* Danny J. Boscan O. [dannyboscan@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=dannyboscan@gmail.com)
-* Over O Martinez R. [overmartinez@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=overmartinez@gmail.com)
-* Yeniree Sanchez S. [yeniree@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=yeniree@gmail.com)
+* Danny J. Boscan O., Correo: [dannyboscan@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=dannyboscan@gmail.com)
+* Over O Martinez R., Correo: [overmartinez@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=overmartinez@gmail.com)
+* Yeniree Sanchez S., Correo: [yeniree@gmail.com](https://mail.google.com/mail/?view=cm&amp;fs=1&amp;tf=1&amp;to=yeniree@gmail.com)
