@@ -1,0 +1,40 @@
+.help-block {
+	font-size: 0.785em;
+}
+
+.error {
+	margin-top: 7px;
+}
+
+.merror {
+	position: relative;
+	color: white;
+	text-transform: uppercase;
+	font-weight: normal;
+	padding: 5px;
+	border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	background-color: #D95C5C;
+}
+
+table > tbody > tr > td > a {
+	padding: 0 8px;
+}
+
+table > tbody > tr.danger > td > a[alt="eliminar"] {
+	padding: 0 8px;
+	color: white !important;
+}
+
+table > tbody > tr > td > a:hover,
+table > tbody > tr > td > a:active {
+	text-decoration: none;
+	transform: scale(1.3);
+	-moz-transform: scale(1.3);
+	-webkit-transform: scale(1.3);
+}
+
+.well {
+	color: inherit !important;
+}
