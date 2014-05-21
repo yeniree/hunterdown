@@ -1,4 +1,6 @@
 <?php 
+error_reporting(0);
+
 $servidor = "localhost";
 $usuariodb = "root";
 $contradb = "";

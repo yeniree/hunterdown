@@ -28,6 +28,7 @@ $status = $row['status'];
 		<span class="text-info"><?php echo $email; ?> </span>
 	</p>
 
+	<p id="general"></p>
 	
 	<input type="hidden" name="id" id="id" value="<?php echo $idusuario; ?>"/>
 	<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre; ?>"/>
@@ -36,10 +37,28 @@ $status = $row['status'];
 		<div class="col-md-12 text-center">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" style="width: 120px;" data-dismiss="modal">Cancelar</button>
-				<input type="submit" id="btneliminar" name="btneliminar" 
+				<input type="button" id="btneliminar" name="btneliminar" 
 				class="btn btn-danger col-md-3" style="width: 120px;" value="Eliminar"/>
 			</div>
 		</div>
 	</div>
 	
 </form>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#btneliminar").click(function(e){
+				e.preventDefault();
+				$.ajax({  
+					type: "POST",
+					url: "configUser.php",
+					data: {id: ""+$('#id').val()+"", nombre: ""+$('#nombre').val()+"", operacion: 0},
+					success: function(data) {
+						$("#general").html(data);
+						$("#btneliminar").hide();
+						$(".lead").hide();
+					}  
+				});
+			});
+		});
+	</script>
