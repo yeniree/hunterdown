@@ -9,21 +9,28 @@ include("header.php");
 ?>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#menulateral > li > a").click(function(e){
-		e.preventDefault();
-		var pagina = $(this).attr('href');
-		var padre = $(this).parent();
+	$(document).ready(function(){
 		$.ajax({  
-			url: pagina,
+			url: "adminusers.php",
 			success: function(data) {
-				$("#menulateral > li").removeClass("active");
-				padre.addClass('active');
 				$('#contenido').html(data);
 			}  
 		});
+
+		$("#menulateral > li > a").click(function(e){
+			e.preventDefault();
+			var pagina = $(this).attr('href');
+			var padre = $(this).parent();
+			$.ajax({  
+				url: pagina,
+				success: function(data) {
+					$("#menulateral > li").removeClass("active");
+					padre.addClass('active');
+					$('#contenido').html(data);
+				}  
+			});
+		});
 	});
-});
 </script>
 
 <div class="container" style="margin-top: 30px;">
@@ -32,7 +39,7 @@ $(document).ready(function(){
 			<ul id="menulateral" class="nav nav-pills nav-stacked">
 				<li><a href="adminusers.php">Usuarios</a></li>
 				<li><a href="servidores.php">Servidores</a></li>
-				<li><a href="#">Pliculas</a></li>
+				<li><a href="#">Peliculas</a></li>
 				<li><a href="#">Series</a></li>
 				<li><a href="#">Algo mas</a></li>
 				<li><a href="#">Algo mas</a></li>
