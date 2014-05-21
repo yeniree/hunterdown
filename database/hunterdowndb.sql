@@ -198,7 +198,7 @@ CREATE TABLE `servidores` (
 
 LOCK TABLES `servidores` WRITE;
 /*!40000 ALTER TABLE `servidores` DISABLE KEYS */;
-INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink','servidores/2.png'),(3,'MediaFire','servidores/'),(4,'MegaUpload','servidores/'),(5,'RapidShare','servidores/');
+INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink','servidores/2.png'),(3,'MediaFire','servidores/3.png'),(4,'Mega','servidores/4.png'),(5,'RapidShare','servidores/5.png');
 /*!40000 ALTER TABLE `servidores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,4 +337,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-20  5:22:20
+-- Dump completed on 2014-05-20 21:09:46
