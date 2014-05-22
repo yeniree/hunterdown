@@ -23,7 +23,6 @@ if (!isset($_POST['btneditar'])) {
 	?>
 
 	<form id="form-editar" class="form-horizontal" method="post" enctype="multipart/form-data" >
-	<p id="general"></p>
 		<!-- Select Basic -->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="tipo_usu">Nombre del Servidor</label>
@@ -74,7 +73,16 @@ if (!isset($_POST['btneditar'])) {
 				processData: false,
 				contentType: false,
 				success: function(data) {
-					$('#general').html(data);
+					$('.modal').modal('hide');
+
+					$.ajax({  
+						url: "servidores.php",
+						success: function(contenido) {
+							$('#contenido').html(contenido);
+							$('#generals').html(data);
+
+						}  
+					});
 				}  
 			});
 		});

@@ -44,6 +44,7 @@ include 'funciones.php';
 <div class="row">
 	<div class="col-md-12">
 		<h1 style="margin-top: 0;">Lista de usuarios</h1>
+		<p id="generalu"></p>
 
 		<?php 
 		$sql = "SELECT * FROM usuarios WHERE 1=1";
@@ -122,16 +123,3 @@ include 'funciones.php';
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.modal').on('hidden.bs.modal', function () {
-				$.ajax({  
-					url: "adminusers.php",
-					success: function(data) {
-						$('#contenido').html(data);
-					}  
-				});
-			});
-		});
-	</script>
