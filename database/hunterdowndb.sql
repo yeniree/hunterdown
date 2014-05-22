@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `hunterdowndb` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `hunterdowndb`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
 -- Host: 127.0.0.1    Database: hunterdowndb
 -- ------------------------------------------------------
--- Server version	5.6.14
+-- Server version	5.5.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -56,7 +56,7 @@ CREATE TABLE `categorias` (
   `idcategorias` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idcategorias`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,7 +65,7 @@ CREATE TABLE `categorias` (
 
 LOCK TABLES `categorias` WRITE;
 /*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-INSERT INTO `categorias` VALUES (1,'Películas'),(2,'Series'),(3,'Documental');
+INSERT INTO `categorias` VALUES (1,'PelÃ­Â­culas'),(2,'Series');
 /*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +189,7 @@ CREATE TABLE `servidores` (
   `nombre` varchar(30) NOT NULL,
   `logo` varchar(100) NOT NULL,
   PRIMARY KEY (`idservidores`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `servidores` (
 
 LOCK TABLES `servidores` WRITE;
 /*!40000 ALTER TABLE `servidores` DISABLE KEYS */;
-INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink','servidores/2.png'),(3,'MediaFire','servidores/3.png'),(4,'Mega','servidores/4.png'),(5,'RapidShare','servidores/5.png');
+INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink',''),(3,'MediaFire','servidores/3.png'),(4,'Mega','servidores/4.png'),(13,'RapidShare','servidores/13.png');
 /*!40000 ALTER TABLE `servidores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -315,7 +315,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_usuarios_tipousuarios_idx` (`idtipousuarios`),
   CONSTRAINT `fk_usuarios_tipousuarios` FOREIGN KEY (`idtipousuarios`) REFERENCES `tipousuarios` (`idtipousuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -324,7 +324,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (25,1,'Danny Boscan','admin','dannyboscan@gmail.com','5ff3c11f9a342cdf0ac25a85dcdddda5','1985-03-21','Hombre',1),(26,2,'Over','oversio','overmartinez@gmail.com','b59c67bf196a4758191e42f76670ceba','1986-07-25','Hombre',1);
+INSERT INTO `usuarios` VALUES (25,1,'Danny Boscan','admin','dannyboscan@gmail.com','5ff3c11f9a342cdf0ac25a85dcdddda5','1985-03-21','Hombre',1),(26,2,'Over','oversio','overmartinez@gmail.com','b59c67bf196a4758191e42f76670ceba','1986-07-25','Hombre',1),(31,1,'Yeniree Sanchez','yeni_sanchez','yeniree@gmail.com','81dc9bdb52d04dc20036dbd8313ed055','1987-04-20','Mujer',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -337,4 +337,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-20 21:09:46
+-- Dump completed on 2014-05-21 21:17:43

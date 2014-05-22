@@ -51,7 +51,6 @@ if (isset($_POST['btn-ok'])) {
 				$_SESSION['nombre'] = $row['nombre'];
 				$_SESSION['email'] = $row['email'];
 				$_SESSION['tipo_usu'] = $row['idtipousuarios'];
-				$_SESSION['idusuarios'] = $row['idusuarios'];
 				header("location: index.php");
 			}
 		}

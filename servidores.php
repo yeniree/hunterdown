@@ -69,6 +69,7 @@ include 'funciones.php';
 
 		if ($rs->num_rows > 0) {
 			?>
+			<p id="generals"></p>
 
 			<table id="lservidores" class="table table-striped table-hover table-responsive" id="lservers">
 				<thead>
@@ -151,16 +152,3 @@ include 'funciones.php';
 
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.modal').on('hidden.bs.modal', function () {
-				$.ajax({  
-					url: "servidores.php",
-					success: function(data) {
-						$('#contenido').html(data);
-					}  
-				});
-			});
-		});
-	</script>
