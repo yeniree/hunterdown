@@ -39,7 +39,11 @@ include("header.php");
 			<ul id="menulateral" class="nav nav-pills nav-stacked">
 				<li><a href="adminusers.php">Usuarios</a></li>
 				<li><a href="servidores.php">Servidores</a></li>
+<<<<<<< HEAD
 				<li><a href="adminpeliculas.php">Peliculas</a></li>
+=======
+				<li><a href="#">Peliculas</a></li>
+>>>>>>> 1c4a95d98c93269d9cfe2ef341ba18e536ac1508
 				<li><a href="#">Series</a></li>
 				<li><a href="categorias.php">Cetegorías</a></li>
 				<li><a href="#">Algo mas</a></li>
