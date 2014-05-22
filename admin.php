@@ -41,7 +41,7 @@ include("header.php");
 				<li><a href="servidores.php">Servidores</a></li>
 				<li><a href="#">Peliculas</a></li>
 				<li><a href="#">Series</a></li>
-				<li><a href="#">Algo mas</a></li>
+				<li><a href="categorias.php">Cetegorías</a></li>
 				<li><a href="#">Algo mas</a></li>
 			</ul>
 		</div>

@@ -4,25 +4,26 @@ if(!isset($_SESSION['user']) || $_SESSION['tipo_usu'] != 1) {
 	header("location: index.php");
 }
 
-$idservidores = $_GET['id'];
+$idcategorias = $_GET['id'];
 
 require 'conexion.php';
-$sql = "SELECT * FROM servidores WHERE idservidores = ".$idservidores;
+$sql = "SELECT * FROM categorias WHERE idcategorias = ".$idcategorias;
 
 $rs = $conn->query($sql);
 
 $row = $rs->fetch_assoc();
 $nombre = trim($row['nombre']);
-$idservidores=$row['idservidores'];
+$idcategorias=$row['idcategorias'];
 ?>
 
 <form id="form-eliminar" class="form-horizontal" method="post" enctype="multipart/form-data" >
 	<p class="lead">
-		Esta seguro de Eliminar el servidor:<br/>
+		Esta seguro de Eliminar la categoría:<br/>
 		<?php echo $nombre; ?><br/>
 	</p>
 
-	<input type="hidden" name="id" id="id" value="<?php echo $idservidores; ?>"/>
+	
+	<input type="hidden" name="id" id="id" value="<?php echo $idcategorias; ?>"/>
 	<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre; ?>"/>
 
 	<div class="form-group" style="margin-top: 35px;">
@@ -45,7 +46,7 @@ $idservidores=$row['idservidores'];
 			e.preventDefault();
 
 			$.ajax( {
-				url: 'configServidor.php',
+				url: 'configCategorias.php',
 				type: 'POST',
 				data: new FormData(this),
 				processData: false,
@@ -54,14 +55,13 @@ $idservidores=$row['idservidores'];
 					$('.modal').modal('hide');
 
 					$.ajax({  
-						url: "servidores.php",
+						url: "categorias.php",
 						success: function(contenido) {
 							$('#contenido').html(contenido);
-							$('#generals').html(data);
+							$('#generalc').html(data);
 
 						}  
 					});
-
 				}  
 			});
 		});

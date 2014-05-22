@@ -9,22 +9,13 @@ include_once "funciones.php";
 
 	<!-- Select Basic -->
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="tipo_usu">Nombre del Servidor</label>
+		<label class="col-md-4 control-label" for="tipo_usu">Nombre de la Categoría</label>
 		<div class="col-md-6">
-			<input id="nombre" name="nombre" type="text" placeholder="Nombre del Servidor" 
+			<input id="nombre" name="nombre" type="text" placeholder="Nombre de la Categoría" 
 			class="form-control input-md" value=""/>
 			<p id="error"></p>
 		</div>
 		
-	</div>
-
-	<!-- Select Basic -->
-	<div class="form-group">
-		<label class="col-md-4 control-label" for="status">Logo</label>
-
-		<div class="col-md-6 control-label">
-			<input type="file" name="uplogo"  />
-		</div>
 	</div>
 
 	<div class="form-group" style="margin-top: 35px;">
@@ -54,7 +45,7 @@ include_once "funciones.php";
 			$("#error").html("<?php echo mensajeError('Debe ingresar un nombre valido'); ?>");
 		}else{
 			$.ajax( {
-				url: 'configServidor.php',
+				url: 'configCategorias.php',
 				type: 'POST',
 				data: new FormData(this),
 				processData: false,
@@ -63,10 +54,10 @@ include_once "funciones.php";
 					$('.modal').modal('hide');
 
 					$.ajax({  
-						url: "servidores.php",
+						url: "categorias.php",
 						success: function(contenido) {
 							$('#contenido').html(contenido);
-							$('#generals').html(data);
+							$('#generalc').html(data);
 
 						}  
 					});

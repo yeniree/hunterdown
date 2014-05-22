@@ -27,8 +27,6 @@ $status = $row['status'];
 		<?php echo $nombre; ?><span class="text-muted"> (<?php echo $user; ?>)</span><br/>
 		<span class="text-info"><?php echo $email; ?> </span>
 	</p>
-
-	<p id="general"></p>
 	
 	<input type="hidden" name="id" id="id" value="<?php echo $idusuario; ?>"/>
 	<input type="hidden" name="nombre" id="nombre" value="<?php echo $nombre; ?>"/>
@@ -54,9 +52,15 @@ $status = $row['status'];
 					url: "configUser.php",
 					data: {id: ""+$('#id').val()+"", nombre: ""+$('#nombre').val()+"", operacion: 0},
 					success: function(data) {
-						$("#general").html(data);
-						$("#btneliminar").hide();
-						$(".lead").hide();
+						$('.modal').modal('hide'); 
+						$.ajax({  
+							url: "adminusers.php",
+							success: function(contenido) {
+								$('#contenido').html(contenido);
+								$('#generalu').html(data);
+
+							}  
+						});	
 					}  
 				});
 			});

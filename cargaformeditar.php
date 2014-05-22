@@ -27,8 +27,6 @@ if (!isset($_POST['btneditar'])) {
 			<span class="text-info"><?php echo $email; ?> </span>
 		</p>
 
-		<p id="general"></p>
-
 		<!-- Select Basic -->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="tipo_usu">Tipo Usuario</label>
@@ -96,10 +94,18 @@ if (!isset($_POST['btneditar'])) {
 					type: "POST",
 					url: "configUser.php",
 					data: {id: ""+$('#id').val()+"", tipo_usu: ""+$('#tipo_usu').val()+"", 
-							status: ""+$('#status').val()+"", passwd: ""+$('#passwd').val()+"", oldpass: ""+$('#oldpass').val()+"",
-							nombre: ""+$('#nombre').val()+"", operacion: 1},
+					status: ""+$('#status').val()+"", passwd: ""+$('#passwd').val()+"", oldpass: ""+$('#oldpass').val()+"",
+					nombre: ""+$('#nombre').val()+"", operacion: 1},
 					success: function(data) {
-						$("#general").html(data);						
+						$('.modal').modal('hide'); 
+						$.ajax({  
+							url: "adminusers.php",
+							success: function(contenido) {
+								$('#contenido').html(contenido);
+								$('#generalu').html(data);
+
+							}  
+						});					
 					}  
 				});
 			});
