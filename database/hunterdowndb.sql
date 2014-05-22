@@ -56,7 +56,7 @@ CREATE TABLE `categorias` (
   `idcategorias` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idcategorias`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +110,7 @@ CREATE TABLE `generos` (
   `idgeneros` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   PRIMARY KEY (`idgeneros`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `generos` (
 
 LOCK TABLES `generos` WRITE;
 /*!40000 ALTER TABLE `generos` DISABLE KEYS */;
-INSERT INTO `generos` VALUES (1,'Aventura'),(2,'Fantasía'),(3,'Drama'),(4,'Terror'),(5,'Comedia'),(6,'Suspenso'),(7,'Acción'),(8,'Ciencia Ficción'),(9,'Dibujos Animados');
+INSERT INTO `generos` VALUES (1,'Aventura'),(2,'FantasÃ­a'),(3,'Drama'),(4,'Terror'),(5,'Comedia'),(6,'Suspenso'),(7,'AcciÃ³n'),(8,'Ciencia FicciÃ³n'),(9,'Dibujos Animados');
 /*!40000 ALTER TABLE `generos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ CREATE TABLE `generostemas` (
   KEY `fk_generos_has_temas_generos1_idx` (`idgeneros`),
   CONSTRAINT `fk_generos_has_temas_generos1` FOREIGN KEY (`idgeneros`) REFERENCES `generos` (`idgeneros`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_generos_has_temas_temas1` FOREIGN KEY (`idtemas`) REFERENCES `temas` (`idtemas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,6 +148,7 @@ CREATE TABLE `generostemas` (
 
 LOCK TABLES `generostemas` WRITE;
 /*!40000 ALTER TABLE `generostemas` DISABLE KEYS */;
+INSERT INTO `generostemas` VALUES (13,1,1),(14,3,1),(15,2,1);
 /*!40000 ALTER TABLE `generostemas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,7 +190,7 @@ CREATE TABLE `servidores` (
   `nombre` varchar(30) NOT NULL,
   `logo` varchar(100) NOT NULL,
   PRIMARY KEY (`idservidores`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,7 +229,7 @@ CREATE TABLE `temas` (
   KEY `fk_temas_usuarios1_idx` (`idusuarios`),
   CONSTRAINT `fk_temas_categorias1` FOREIGN KEY (`idcategorias`) REFERENCES `categorias` (`idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_temas_usuarios1` FOREIGN KEY (`idusuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -237,6 +238,7 @@ CREATE TABLE `temas` (
 
 LOCK TABLES `temas` WRITE;
 /*!40000 ALTER TABLE `temas` DISABLE KEYS */;
+INSERT INTO `temas` VALUES (1,2,31,'Games of Thrones',4,'La historia de CanciÃ³n de Hielo y Fuego se sitÃºa en un mundo ficticio medieval. Hay tres lÃ­neas argumentales en la serie: la crÃ³nica de la guerra civil dinÃ¡stica por el control de Poniente entre varias familias nobles; la creciente amenaza de los Otros, apenas contenida por un inmenso muro de hielo que protege el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada del rey que fue asesinado en otra guerra civil hace quince aÃ±os, quien busca regresar a Poniente a reclamar sus derechos.',2014,'2014-05-22 09:05:06','',NULL,'',' HDTV',0);
 /*!40000 ALTER TABLE `temas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,4 +339,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-21 21:17:43
+-- Dump completed on 2014-05-22 18:13:24

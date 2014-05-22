@@ -4,10 +4,10 @@ if(!isset($_SESSION['user']) || $_SESSION['tipo_usu'] != 1) {
 	header("location: index.php");
 }
 
-$idcategorias = $_GET['id'];
+$idgeneros = $_GET['id'];
 
 require 'conexion.php';
-$sql = "SELECT * FROM categorias WHERE idcategorias = ".$idcategorias;
+$sql = "SELECT * FROM generos WHERE idgeneros = ".$idgeneros;
 
 $rs = $conn->query($sql);
 
@@ -19,14 +19,14 @@ $nombre = trim($row['nombre']);
 <form id="form-editar" class="form-horizontal" method="post" enctype="multipart/form-data" >
 	<!-- Select Basic -->
 	<div class="form-group">
-		<label class="col-md-4 control-label" for="tipo_usu">Categoría</label>
+		<label class="col-md-4 control-label" for="tipo_usu">Género</label>
 		<div class="col-md-5">
-			<input id="nombre" name="nombre" type="text" placeholder="Nombre de la Categoría" 
+			<input id="nombre" name="nombre" type="text" placeholder="Nombre del Género" 
 			class="form-control input-md" required="" value="<?php echo $nombre; ?>">
 		</div>
 	</div>
 
-	<input type="hidden" name="idcat" id="idcat" value="<?php echo $idcategorias; ?>"/>
+	<input type="hidden" name="idcat" id="idcat" value="<?php echo $idgeneros; ?>"/>
 	<input type="hidden" name="nombrecat" id="nombrecat" value="<?php echo $nombre; ?>"/>
 
 	<div class="form-group" style="margin-top: 35px;">
@@ -49,7 +49,7 @@ $nombre = trim($row['nombre']);
 		e.preventDefault();
 
 		$.ajax( {
-			url: 'configCategorias.php',
+			url: 'configgeneros.php',
 			type: 'POST',
 			data: new FormData(this),
 			processData: false,
@@ -58,10 +58,10 @@ $nombre = trim($row['nombre']);
 				$('.modal').modal('hide'); 
 				
 				$.ajax({  
-					url: "categorias.php",
+					url: "generos.php",
 					success: function(contenido) {
 						$('#contenido').html(contenido);
-						$('#generalc').html(data);
+						$('#generalg').html(data);
 
 					}  
 				});
