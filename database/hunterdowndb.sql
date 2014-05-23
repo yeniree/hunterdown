@@ -42,7 +42,7 @@ CREATE TABLE `articulos` (
 
 LOCK TABLES `articulos` WRITE;
 /*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
-INSERT INTO `articulos` VALUES (1,4,'24',1,'2014-05-23 01:05:30'),(3,1,'Game of Thrones: Ice and Fire: A Foreshadowing',0,'2014-05-23 04:05:22'),(4,1,'Two Swords',1,'2014-05-23 04:05:30'),(5,1,'The Lion and the Rose',2,'2014-05-23 04:05:03'),(6,1,'Breaker of Chains',3,'2014-05-23 04:05:26'),(7,1,'Oathkeeper',4,'2014-05-23 04:05:10');
+INSERT INTO `articulos` VALUES (3,1,'Game of Thrones: Ice and Fire: A Foreshadowing',0,'2014-05-23 04:05:22'),(4,1,'Two Swords',1,'2014-05-23 04:05:30'),(5,1,'The Lion and the Rose',2,'2014-05-23 04:05:03'),(6,1,'Breaker of Chains',3,'2014-05-23 04:05:26'),(7,1,'Oathkeeper',4,'2014-05-23 04:05:10');
 /*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +140,7 @@ CREATE TABLE `generostemas` (
   KEY `fk_generos_has_temas_generos1_idx` (`idgeneros`),
   CONSTRAINT `fk_generos_has_temas_generos1` FOREIGN KEY (`idgeneros`) REFERENCES `generos` (`idgeneros`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_generos_has_temas_temas1` FOREIGN KEY (`idtemas`) REFERENCES `temas` (`idtemas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `generostemas` (
 
 LOCK TABLES `generostemas` WRITE;
 /*!40000 ALTER TABLE `generostemas` DISABLE KEYS */;
-INSERT INTO `generostemas` VALUES (16,5,4),(17,6,4),(63,1,1),(64,3,1),(65,2,1);
+INSERT INTO `generostemas` VALUES (69,1,1),(70,3,1),(71,2,1),(74,3,4),(75,6,4),(76,4,4);
 /*!40000 ALTER TABLE `generostemas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +179,7 @@ CREATE TABLE `puntajes` (
 
 LOCK TABLES `puntajes` WRITE;
 /*!40000 ALTER TABLE `puntajes` DISABLE KEYS */;
-INSERT INTO `puntajes` VALUES (1,1,31,10),(2,4,31,2);
+INSERT INTO `puntajes` VALUES (1,1,31,10),(2,4,31,7);
 /*!40000 ALTER TABLE `puntajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +244,7 @@ CREATE TABLE `temas` (
 
 LOCK TABLES `temas` WRITE;
 /*!40000 ALTER TABLE `temas` DISABLE KEYS */;
-INSERT INTO `temas` VALUES (1,2,31,'Games of Thrones',4,'La historia de CanciÃ³n de Hielo y Fuego se sitÃºa en un mundo ficticio medieval. Hay tres lÃ­neas argumentales en la serie: la crÃ³nica de la guerra civil dinÃ¡stica por el control de Poniente entre varias familias nobles; la creciente amenaza de los Otros, apenas contenida por un inmenso muro de hielo que protege el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada del rey que fue asesinado en otra guerra civil hace quince aÃ±os, quien busca regresar a Poniente a reclamar sus derechos.',2014,'2014-05-23 19:05:42','',NULL,'',' HDTV',0,NULL),(4,1,31,'24',1,'fdfdsfds',2004,'2014-05-23 01:05:31','www.gsf',NULL,'www.ggfg','dvd',0,NULL);
+INSERT INTO `temas` VALUES (1,2,31,'Games of Thrones',4,'La historia de CanciÃ³n de Hielo y Fuego se sitÃºa en un mundo ficticio medieval. Hay tres lÃ­neas argumentales en la serie: la crÃ³nica de la guerra civil dinÃ¡stica por el control de Poniente entre varias familias nobles; la creciente amenaza de los Otros, apenas contenida por un inmenso muro de hielo que protege el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada del rey que fue asesinado en otra guerra civil hace quince aÃ±os, quien busca regresar a Poniente a reclamar sus derechos.',2014,'2014-05-23 20:05:04','',NULL,'',' HDTV',0,'posters/1.jpeg'),(4,2,31,'Hannibal',2,'\"Hannibal\", serie de televisiÃ³n basada en el personaje de Hannibal Lecter. Bryan Fuller, responsable del proyecto, ha comentado que la idea inicial que tienen es la de realizar siete temporadas. La serie empezarÃ­a con una precuela de \"El dragÃ³n rojo\", es decir en la relaciÃ³n entre Hannibal y Will, aunque sin mencionar la infancia del protagonista que ya se explica en una precuela. La serie seguirÃ­a en sus siguientes temporadas adaptando de nuevo los siguientes libros de la saga tanto \"El dragÃ³n rojo\", \"El silencio de los corderos\" o \"Hannibal\" donde terminarÃ­a la saga literaria aunque podrÃ­a continuar su historia inventado su continuaciÃ³n. Fuller tambiÃ©n ha comentado que no tienen intenciÃ³n de mostrar a Hannibal como un cruel villano desde el comienzo. De hecho afirma que si el pÃºblico no conociese su historia, no podrÃ­an esperar lo que sucederÃ¡.',2014,'2014-05-23 20:05:12','',NULL,'','HDTV',0,'posters/4.jpeg');
 /*!40000 ALTER TABLE `temas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +298,7 @@ CREATE TABLE `urls` (
 
 LOCK TABLES `urls` WRITE;
 /*!40000 ALTER TABLE `urls` DISABLE KEYS */;
-INSERT INTO `urls` VALUES (1,7,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(2,7,2,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(3,7,3,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(4,7,4,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(5,7,13,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(20,3,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(21,4,3,'http://www.google.com'),(23,1,1,'vbv');
+INSERT INTO `urls` VALUES (1,7,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(2,7,2,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(3,7,3,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(4,7,4,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(5,7,13,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(20,3,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(21,4,3,'http://www.google.com');
 /*!40000 ALTER TABLE `urls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-23 13:17:37
+-- Dump completed on 2014-05-23 14:39:19

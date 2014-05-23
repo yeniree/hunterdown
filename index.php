@@ -2,9 +2,50 @@
 session_start();
 $caru=true; 
 include("header.php");
+require "conexion.php";
 ?>
 <div class="container" style="margin: 70px auto;">
 
+	<?php
+	$sql="SELECT temas.*, categorias.nombre, ifnull(MAX(articulos.episodio),0) capitulo
+	FROM 
+	temas 
+	INNER JOIN 
+	categorias 
+	ON temas.idcategorias = categorias.idcategorias 
+	LEFT JOIN 
+	articulos
+	ON articulos.idtemas = temas.idtemas
+	GROUP BY temas.idtemas
+	ORDER BY temas.fechahora desc
+	LIMIT 0,10";
+	$rs = $conn->query($sql);
+	while ($row = $rs->fetch_assoc()) {
+
+		$capitulo=($row['capitulo']==0)?"":", Capitulo ".$row['capitulo'];
+
+		echo "<div class='row featurette'>";
+
+		echo "<div class='col-md-7'>";
+		echo "<h2 class='featurette-heading'>".$row['titulo'].". <span class='text-muted'>".$row['temporada']." Temporada ".$capitulo."</span></h2>";
+		echo "<blockquote>";
+		echo "<p>Sinopsis</p>";
+		echo "<footer>".$row['sipnosis']."</footer>";
+		echo "</blockquote>";
+		echo "</div>";
+
+		echo "<div class='col-md-5'>";
+		echo "<img class='featurette-image img-responsive' src='img/".$row['imagen']."' alt='".$row['titulo']."'>";
+		echo "</div>";
+
+		echo "</div>";
+
+		echo "<hr class='featurette-divider'>";
+
+	}
+	?>
+
+<!--
 	<div class="row featurette">
 		<div class="col-md-7">
 			<h2 class="featurette-heading">True Detective. <span class="text-muted">1ª Temporada, Capitulo 04</span></h2>
@@ -77,5 +118,6 @@ include("header.php");
 			<img class="featurette-image img-responsive" src="img/posters/helix_1.jpg" alt="Helix Poster">
 		</div>
 	</div>
+-->
 </div>
 <?php include("footer.php"); ?>

@@ -49,6 +49,47 @@ if ($operacion==0){//borra
 	WHERE idtemas='$idtemas'";
 	$rs = $conn->query($sql);
 
+	if (!$_FILES["imagen"]["error"]){
+		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+		if (in_array($_FILES['imagen']['type'], $permitidos)){
+			//esta es la ruta donde copiaremos la imagen
+			switch ($_FILES['imagen']['type']) {
+				case 'image/jpg':
+				$type="jpg";
+				break;
+
+				case 'image/jpeg':
+				$type="jpeg";
+				break;
+
+				case 'image/gif':
+				$type="gif";
+				break;
+				
+				case 'image/png':
+				$type="png";
+				break;
+			}
+
+			$ruta = "img/posters/" .$idtemas.".".$type;
+			$resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);	
+
+			if ($resultado){
+				if ($operacion==1){
+					$sql="UPDATE temas SET imagen='posters/".$idtemas.".".$type."' WHERE idtemas='".$idtemas."'";
+					$rs = $conn->query($sql);
+					$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El logo ha sido actualizado exitosamente.</div>";				
+				}
+			} else {
+				$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Ha ocurrido un error.</div>";
+			}
+
+		} else {
+			$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Imágen no permitida.</div>";
+		}
+	}
+
+
 	$sql="DELETE FROM generostemas WHERE idtemas='$idtemas'";
 	$rs = $conn->query($sql);
 
@@ -83,12 +124,55 @@ if ($operacion==0){//borra
 	$generos=$_POST['generos'];
 	$puntaje=$_POST['puntaje'];
 
+
 	$sql="INSERT INTO temas (idcategorias, idusuarios, titulo, temporada, sipnosis, ano, fechahora, pagoficial, trailer, formato) VALUES ('$categoria','".$_SESSION['idusuarios']."','$titulo','$temporada','$sipnosis','$ano','".date("Y-m-d H:m:s")."','$pag','$trailer','$formato')";
 	$rs = $conn->query($sql);
 
 	$sql="SELECT MAX(idtemas) idtemas FROM temas";
 	$rs = $conn->query($sql);
 	$row = $rs->fetch_assoc();
+	$idtemas=$row['idtemas'];	
+
+	if (!$_FILES["imagen"]["error"]){
+		$permitidos = array("image/jpg", "image/jpeg", "image/gif", "image/png");
+		if (in_array($_FILES['imagen']['type'], $permitidos)){
+			//esta es la ruta donde copiaremos la imagen
+			switch ($_FILES['imagen']['type']) {
+				case 'image/jpg':
+				$type="jpg";
+				break;
+
+				case 'image/jpeg':
+				$type="jpeg";
+				break;
+
+				case 'image/gif':
+				$type="gif";
+				break;
+				
+				case 'image/png':
+				$type="png";
+				break;
+			}
+
+			$ruta = "img/posters/" .$idtemas.".".$type;
+			$resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);	
+
+			if ($resultado){
+				if ($operacion==1){
+					$sql="UPDATE temas SET imagen='posters/".$idtemas.".".$type."' WHERE idtemas='".$idtemas."'";
+					$rs = $conn->query($sql);
+					$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El logo ha sido actualizado exitosamente.</div>";				
+				}
+			} else {
+				$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Ha ocurrido un error.</div>";
+			}
+
+		} else {
+			$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Imágen no permitida.</div>";
+		}
+	}
+
 
 	foreach ($generos as $idgeneros) {
 		$sql="INSERT INTO generostemas (idgeneros, idtemas) VALUES ('$idgeneros','".$row['idtemas']."')";

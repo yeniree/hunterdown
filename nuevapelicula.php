@@ -203,6 +203,13 @@ if(!empty($id)) {
 
 					</div>
 
+					<div class="form-group">
+						<label class="col-md-3 control-label">Imágen</label>
+						<div class="col-md-7">
+							<input type="file" name="imagen" id="imagen"  />
+						</div>
+					</div>
+
 
 					<div class="form-group" style="margin-top: 35px;">
 						<div class="col-md-12 text-center">
@@ -274,102 +281,102 @@ if(!empty($id)) {
 						<a href="<?php echo $row['idarticulos']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar Artículo"></a>
 
 						<?php
-						}
-						echo "  </td>";
-						echo "</tr>";
 					}
-					echo "<tr><td colspan='5'>Total de Registros: ".$rs->num_rows."</td></tr>"; 
-					?>
-				</tbody>
-			</table>
-		</div>
+					echo "  </td>";
+					echo "</tr>";
+				}
+				echo "<tr><td colspan='5'>Total de Registros: ".$rs->num_rows."</td></tr>"; 
+				?>
+			</tbody>
+		</table>
 	</div>
+</div>
 
-	<!-- editar-->
-	<div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="Editar Artículo" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Editar Artículo</h4>
-				</div>
-				<div id="editarContenido" class="modal-body">
+<!-- editar-->
+<div class="modal fade" id="modalArticulo" tabindex="-1" role="dialog" aria-labelledby="Editar Artículo" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Editar Artículo</h4>
+			</div>
+			<div id="editarContenido" class="modal-body">
 
-				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!-- eliminar-->
-	<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="Eliminar Artículo" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Eliminar Artículo</h4>
-				</div>
-				<div id="eliminarContenido" class="modal-body">
+<!-- eliminar-->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="Eliminar Artículo" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Eliminar Artículo</h4>
+			</div>
+			<div id="eliminarContenido" class="modal-body">
 
-				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<script type="text/javascript">
-		if ($("#idtemas").val().length){
-			$("#lepisodios").show();
-		}else{
-			$("#lepisodios").hide();
+<script type="text/javascript">
+	if ($("#idtemas").val().length){
+		$("#lepisodios").show();
+	}else{
+		$("#lepisodios").hide();
+	}
+
+	$("#categoria").change(function(){
+		$("#error").html("");
+	});
+	$("input[type=checkbox]").click(function(){
+		if ($("input[type=checkbox]").is(':checked')){
+			$("#error1").html("");
 		}
+	});
+	$("#titulo").keyup(function(){
+		$("#error2").html("");
+	});
+	$("#temporada").keyup(function(){
+		$("#error3").html("");
+	});
+	$("#sipnosis").keyup(function(){
+		$("#error4").html("");
+	});
+	$("#ano").keyup(function(){
+		$("#error5").html("");
+	});
+	$("#pag").keyup(function(){
+		$("#error6").html("");
+	});
+	$("#trailer").keyup(function(){
+		$("#error7").html("");
+	});
+	$("#formato").keyup(function(){
+		$("#error8").html("");
+	});
 
-		$("#categoria").change(function(){
-			$("#error").html("");
-		});
-		$("input[type=checkbox]").click(function(){
-			if ($("input[type=checkbox]").is(':checked')){
-				$("#error1").html("");
-			}
-		});
-		$("#titulo").keyup(function(){
-			$("#error2").html("");
-		});
-		$("#temporada").keyup(function(){
-			$("#error3").html("");
-		});
-		$("#sipnosis").keyup(function(){
-			$("#error4").html("");
-		});
-		$("#ano").keyup(function(){
-			$("#error5").html("");
-		});
-		$("#pag").keyup(function(){
-			$("#error6").html("");
-		});
-		$("#trailer").keyup(function(){
-			$("#error7").html("");
-		});
-		$("#formato").keyup(function(){
-			$("#error8").html("");
-		});
+	$("#form-nuevo").submit( function( e ) {
+		e.preventDefault();
+		var error=false;
 
-		$("#form-nuevo").submit( function( e ) {
-			e.preventDefault();
-			var error=false;
-
-			if (!$("#categoria").val().length){
-				$("#error").html("<?php echo mensajeError('Debe ingresar una categoria valida'); ?>");
-				error=true;
-			}
-			if (!$("input[type=checkbox]").is(':checked')){
-				$("#error1").html("<?php echo mensajeError('Debe marcar al menos un género'); ?>");
-				error=true;
-			}else{
-				$("#error1").html("");
-			}
-			if (!$("#titulo").val().length){
-				$("#error2").html("<?php echo mensajeError('Debe ingresar un titulo valido'); ?>");
-				error=true;
-			}
+		if (!$("#categoria").val().length){
+			$("#error").html("<?php echo mensajeError('Debe ingresar una categoria valida'); ?>");
+			error=true;
+		}
+		if (!$("input[type=checkbox]").is(':checked')){
+			$("#error1").html("<?php echo mensajeError('Debe marcar al menos un género'); ?>");
+			error=true;
+		}else{
+			$("#error1").html("");
+		}
+		if (!$("#titulo").val().length){
+			$("#error2").html("<?php echo mensajeError('Debe ingresar un titulo valido'); ?>");
+			error=true;
+		}
 		/*if (!$("#temporada").val().length){
 			$("#error3").html("<?php echo mensajeError('Debe ingresar una temporada valida'); ?>");
 			error=true;
