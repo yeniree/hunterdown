@@ -91,9 +91,9 @@ $rs = $conn->query($sql);
 			<td>".$fila['descargas']."</td>
 			<td class='text-center'>";
 				?>
-				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-pencil text-success toolti" alt="editar" data-toggle="tooltip" data-placement="bottom" title="Editar Usuario"></a>
+				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-pencil text-success toolti" alt="editar" data-toggle="tooltip" data-placement="bottom" title="Editar tema"></a>
 
-				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar Usuario"></a>
+				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar tema"></a>
 				<?php
 				echo "  </td>
 			</tr>

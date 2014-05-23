@@ -88,9 +88,9 @@ include 'funciones.php';
 						<td>".$row['nombre']."</td>
 						<td class='text-center'>";
 							?>
-							<a href="<?php echo $row['idgeneros']; ?>" class="glyphicon glyphicon-pencil text-success toolti" alt="editar" data-toggle="tooltip" data-placement="bottom" title="Editar categoria"></a>
+							<a href="<?php echo $row['idgeneros']; ?>" class="glyphicon glyphicon-pencil text-success toolti" alt="editar" data-toggle="tooltip" data-placement="bottom" title="Editar genero"></a>
 
-							<a href="<?php echo $row['idgeneros']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar categoria"></a>
+							<a href="<?php echo $row['idgeneros']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar genero"></a>
 							<?php
 							echo "  </td>
 						</tr>"	;

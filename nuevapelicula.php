@@ -30,6 +30,11 @@ if(!empty($id)) {
 		$idgeneros[] .=$row['idgeneros'];
 	}
 
+	$sql="select * from puntajes WHERE idtemas='$id' and idusuarios='".$_SESSION['idusuarios']."'";
+	$rs = $conn->query($sql);
+	$row = $rs->fetch_assoc();
+	$puntaje=$row['puntaje'];
+
 }else{
 	$operacion=2;
 }
@@ -106,7 +111,7 @@ if(!empty($id)) {
 
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="temp">
 					<label class="col-md-3 control-label">Temporada</label>
 					<div class="col-md-7">
 						<input id="temporada" name="temporada" type="number"  min="1" placeholder="Temporada" 
@@ -175,6 +180,27 @@ if(!empty($id)) {
 
 				</div>
 
+				<div class="form-group">
+					<label class="col-md-3 control-label">Puntaje</label>
+					<div class="col-md-7">
+						<select class="form-control" id="puntaje" name="puntaje">
+							<option></option>
+							<?php
+							for ($i=1; $i <=10; $i++) { 
+								if ($puntaje==$i){
+									$selected="selected";
+								}else{
+									$selected="";
+								}
+								echo "<option value='$i' $selected>$i</option>";
+							}
+							?>
+						</select>
+						<p id="error9"></p>
+					</div>
+
+				</div>
+
 
 				<div class="form-group" style="margin-top: 35px;">
 					<div class="col-md-12 text-center">
@@ -195,8 +221,7 @@ if(!empty($id)) {
 </div>
 
 <script type="text/javascript">
-
-	$("#categoria").keyup(function(){
+	$("#categoria").change(function(){
 		$("#error").html("");
 	});
 	$("input[type=checkbox]").click(function(){
@@ -244,10 +269,10 @@ if(!empty($id)) {
 			$("#error2").html("<?php echo mensajeError('Debe ingresar un titulo valido'); ?>");
 			error=true;
 		}
-		if (!$("#temporada").val().length){
+		/*if (!$("#temporada").val().length){
 			$("#error3").html("<?php echo mensajeError('Debe ingresar una temporada valida'); ?>");
 			error=true;
-		}
+		}*/
 		if (!$("#sipnosis").val().length){
 			$("#error4").html("<?php echo mensajeError('Debe ingresar una sipnosis valida'); ?>");
 			error=true;
