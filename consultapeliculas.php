@@ -4,7 +4,6 @@ require 'conexion.php';
 
 $usuario=$_POST['usuario'];
 $titulo=$_POST['titulo'];
-$fecha=$_POST['fecha'];
 $formato=$_POST['formato'];
 $categoria=$_POST['categoria'];
 
@@ -14,47 +13,48 @@ if (!empty($usuario)){
 	$rs = $conn->query($sql);
 	$row = $rs->fetch_assoc();
 
-	$condicion = " WHERE idusuarios = '".$row['idusuarios']."'";
+	$condicion = " WHERE temas.idusuarios = '".$row['idusuarios']."'";
 }else{
 	$usuario = $_SESSION['user'];
 }
 
 if (!empty($titulo)){
 	if ($condicion){
-		$condicion .= " AND titulo LIKE '%$titulo%'";
+		$condicion .= " AND temas.titulo LIKE '%$titulo%'";
 	}else{
-		$condicion = " WHERE titulo LIKE '%$titulo%'";
-	}
-}
-
-if (!empty($fecha)){
-	$fecha=new Datetime($fecha);
-	if ($condicion){
-		$condicion .= " AND fechahora = '".$fecha->format('Y-m-d H:i:s')."'";
-	}else{
-		$condicion = " WHERE fechahora = '".$fecha->format('Y-m-d H:i:s')."'";
+		$condicion = " WHERE temas.titulo LIKE '%$titulo%'";
 	}
 }
 
 if (!empty($formato)){
 	if ($condicion){
-		$condicion .= " AND formato = '$formato'";
+		$condicion .= " AND temas.formato = '$formato'";
 	}else{
-		$condicion = " WHERE formato = '$formato'";
+		$condicion = " WHERE temas.formato = '$formato'";
 	}
 }
 
 if (!empty($categoria)){
 	if ($condicion){
-		$condicion .= " AND idcategorias = '$categoria'";
+		$condicion .= " AND temas.idcategorias = '$categoria'";
 	}else{
-		$condicion = " WHERE idcategorias = '$categoria'";
+		$condicion = " WHERE temas.idcategorias = '$categoria'";
 	}
 }
 
-if (!$condicion) {$condicion = " WHERE idusuarios = '".$_SESSION['idusuarios']."'";}
+if (!$condicion) {$condicion = " WHERE temas.idusuarios = '".$_SESSION['idusuarios']."'";}
 
-$sql = "SELECT temas.*, categorias.nombre FROM temas INNER JOIN categorias ON temas.idcategorias = categorias.idcategorias ".$condicion;
+$sql = "SELECT COUNT(ifnull(articulos.episodio,0)) episodio, temas.*, categorias.nombre
+FROM 
+temas 
+INNER JOIN 
+categorias 
+ON temas.idcategorias = categorias.idcategorias 
+LEFT JOIN 
+articulos
+ON temas.idtemas = articulos.idtemas ".$condicion."
+GROUP BY temas.idtemas
+ORDER BY temas.fechahora desc";
 //echo $sql."<br/>";
 $rs = $conn->query($sql);
 ?>
@@ -67,7 +67,8 @@ $rs = $conn->query($sql);
 			<th>Título</th>
 			<th>Fecha de Publicación</th>
 			<th>Formato</th>
-			<th>Descargas</th>
+			<th class='text-center'>Artículos</th>
+			<th class='text-center'>Descargas</th>
 			<th class='text-center'>Opciones</th>
 		</tr>
 	</thead>
@@ -76,7 +77,7 @@ $rs = $conn->query($sql);
 		<?php
 
 		if ($rs->num_rows == 0) {
-			echo "<tr><td colspan='8'>No existe Información</td></tr>";
+			echo "<tr><td colspan='9'>No existe Información</td></tr>";
 		}
 		$i=0;
 		while ($fila = $rs->fetch_assoc()) {
@@ -88,18 +89,23 @@ $rs = $conn->query($sql);
 			<td>".$fila['titulo']."</td>
 			<td>".$fila['fechahora']."</td>
 			<td>".$fila['formato']."</td>
-			<td>".$fila['descargas']."</td>
-			<td class='text-center'>";
+			<td class='text-center'>".$fila['episodio']."</td>
+			<td class='text-center'>".$fila['descargas']."</td>
+			<td class='text-left'>";
 				?>
 				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-pencil text-success toolti" alt="editar" data-toggle="tooltip" data-placement="bottom" title="Editar tema"></a>
 
 				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar tema"></a>
+
+				<?php if ($fila['idcategorias']==2){?>
+				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-save text-info toolti" alt="agregar" data-toggle="tooltip" data-placement="bottom" title="Agregar Articulo"></a>
+				<?php }	?>
 				<?php
 				echo "  </td>
 			</tr>
 		</tr>";
 	}
-	echo "<tr><td colspan='8'>Total de Registros: ".$rs->num_rows."</td></tr>"; 
+	echo "<tr><td colspan='9'>Total de Registros: ".$rs->num_rows."</td></tr>"; 
 	?>
 </tbody>
 </table>
@@ -162,6 +168,20 @@ $rs->close();
 				success: function(data) {
 					$('#eliminarContenido').html(data);
 					$("#modalEliminar").modal("show");
+				}  
+			});
+		});
+
+		$("#ltemas > tbody > tr > td > a[alt='agregar']").click(function(e){
+			e.preventDefault();
+			var id = $(this).attr('href');
+			pagina_a_cargar = "articulo.php?id=" + id;
+
+			$.ajax({  
+				url: pagina_a_cargar,  
+				success: function(data) {
+					$('#editarContenido').html(data);
+					$("#modalEditar").modal("show");
 				}  
 			});
 		});

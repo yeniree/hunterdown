@@ -60,9 +60,12 @@ if ($operacion==1 or $operacion==2){// edito el servidor
 	}
 
 	if ($operacion==2 && !$general_error){
-		$logo = ($resultado) ? $logo=servidores/".$idservidores.".".$type." : $logo="";
 		
-		$sql="INSERT INTO servidores (nombre,logo) VALUES ('$nombre','$logo')";
+		if ($resultado){
+			$sql="INSERT INTO servidores (nombre,logo) VALUES ('$nombre','servidores/".$idservidores.".".$type."')";
+		}else{
+			$sql="INSERT INTO servidores (nombre) VALUES ('$nombre')";			
+		}
 		$rs = $conn->query($sql);
 
 		if($conn->affected_rows > 0){

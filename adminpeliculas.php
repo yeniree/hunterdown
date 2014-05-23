@@ -12,7 +12,7 @@ include_once "funciones.php";
 
 		<div class="row">
 			<div class="col-md-10"><h1 style="margin-top: 0;">Lista de Temas</h1></div>
-			<div class="col-md-2 text-right"><a alt="nuevo" id="nuevo" class="btn btn-info">Nueva</a></div>
+			<div class="col-md-2 text-right"><a alt="nuevo" id="nuevo" class="btn btn-info">Nuevo Tema</a></div>
 		</div>
 
 		
@@ -46,11 +46,6 @@ include_once "funciones.php";
 							</div>
 							<br/>
 							<div class="row">
-								<div class="col-md-4">
-									<label>Fecha de Publicación</label>
-									<input  type="text" placeholder="dd/mm/yyyy"  id="fecha" name="fecha" class="form-control">
-									<span id="errorfecha"></span>
-								</div>
 
 								<div class="col-md-4">
 									<label>Formato</label>
@@ -75,20 +70,6 @@ include_once "funciones.php";
 </div>			
 </div>
 
-<!-- nuevo-->
-<!--<div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="Nuevo Tema" aria-hidden="true">
-	<div class="modal-dialog modal-md">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Nuevo tema</h4>
-			</div>
-			<div id="nuevoContenido" class="modal-body">
-
-			</div>
-		</div>
-	</div>
-</div>-->
 
 <script type="text/javascript">
 
@@ -121,7 +102,6 @@ include_once "funciones.php";
 				url: pagina_a_cargar,  
 				success: function(data) {
 					$('#contenido').html(data);
-					//$("#modalNuevo").modal("show");
 				}  
 			});
 		});

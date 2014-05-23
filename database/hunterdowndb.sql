@@ -33,7 +33,7 @@ CREATE TABLE `articulos` (
   PRIMARY KEY (`idarticulos`),
   KEY `fk_articulos_temas1_idx` (`idtemas`),
   CONSTRAINT `fk_articulos_temas1` FOREIGN KEY (`idtemas`) REFERENCES `temas` (`idtemas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +42,7 @@ CREATE TABLE `articulos` (
 
 LOCK TABLES `articulos` WRITE;
 /*!40000 ALTER TABLE `articulos` DISABLE KEYS */;
+INSERT INTO `articulos` VALUES (1,4,'24',1,'2014-05-23 01:05:30'),(3,1,'Game of Thrones: Ice and Fire: A Foreshadowing',0,'2014-05-23 04:05:22'),(4,1,'Two Swords',1,'2014-05-23 04:05:30'),(5,1,'The Lion and the Rose',2,'2014-05-23 04:05:03'),(6,1,'Breaker of Chains',3,'2014-05-23 04:05:26'),(7,1,'Oathkeeper',4,'2014-05-23 04:05:10');
 /*!40000 ALTER TABLE `articulos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +140,7 @@ CREATE TABLE `generostemas` (
   KEY `fk_generos_has_temas_generos1_idx` (`idgeneros`),
   CONSTRAINT `fk_generos_has_temas_generos1` FOREIGN KEY (`idgeneros`) REFERENCES `generos` (`idgeneros`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_generos_has_temas_temas1` FOREIGN KEY (`idtemas`) REFERENCES `temas` (`idtemas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,7 +149,7 @@ CREATE TABLE `generostemas` (
 
 LOCK TABLES `generostemas` WRITE;
 /*!40000 ALTER TABLE `generostemas` DISABLE KEYS */;
-INSERT INTO `generostemas` VALUES (13,1,1),(14,3,1),(15,2,1);
+INSERT INTO `generostemas` VALUES (16,5,4),(17,6,4),(63,1,1),(64,3,1),(65,2,1);
 /*!40000 ALTER TABLE `generostemas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,11 +163,14 @@ DROP TABLE IF EXISTS `puntajes`;
 CREATE TABLE `puntajes` (
   `idpuntajes` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `idtemas` bigint(19) unsigned NOT NULL,
+  `idusuarios` bigint(19) unsigned NOT NULL,
   `puntaje` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`idpuntajes`),
   KEY `fk_puntajes_temas1_idx` (`idtemas`),
+  KEY `fk_puntajes_usuarios1_idx` (`idusuarios`),
+  CONSTRAINT `fk_puntajes_usuarios1` FOREIGN KEY (`idusuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_puntajes_temas1` FOREIGN KEY (`idtemas`) REFERENCES `temas` (`idtemas`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +179,7 @@ CREATE TABLE `puntajes` (
 
 LOCK TABLES `puntajes` WRITE;
 /*!40000 ALTER TABLE `puntajes` DISABLE KEYS */;
+INSERT INTO `puntajes` VALUES (1,1,31,10),(2,4,31,2);
 /*!40000 ALTER TABLE `puntajes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +193,7 @@ DROP TABLE IF EXISTS `servidores`;
 CREATE TABLE `servidores` (
   `idservidores` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(30) NOT NULL,
-  `logo` varchar(100) NOT NULL,
+  `logo` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`idservidores`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -199,7 +204,7 @@ CREATE TABLE `servidores` (
 
 LOCK TABLES `servidores` WRITE;
 /*!40000 ALTER TABLE `servidores` DISABLE KEYS */;
-INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink',''),(3,'MediaFire','servidores/3.png'),(4,'Mega','servidores/4.png'),(13,'RapidShare','servidores/13.png');
+INSERT INTO `servidores` VALUES (1,'torrent','servidores/1.png'),(2,'eLink',NULL),(3,'MediaFire','servidores/3.png'),(4,'Mega','servidores/4.png'),(13,'RapidShare','servidores/13.png');
 /*!40000 ALTER TABLE `servidores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,12 +229,13 @@ CREATE TABLE `temas` (
   `trailer` varchar(250) DEFAULT NULL,
   `formato` varchar(45) DEFAULT NULL,
   `descargas` bigint(20) DEFAULT '0',
+  `imagen` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`idtemas`),
   KEY `fk_temas_categorias1_idx` (`idcategorias`),
   KEY `fk_temas_usuarios1_idx` (`idusuarios`),
   CONSTRAINT `fk_temas_categorias1` FOREIGN KEY (`idcategorias`) REFERENCES `categorias` (`idcategorias`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_temas_usuarios1` FOREIGN KEY (`idusuarios`) REFERENCES `usuarios` (`idusuarios`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +244,7 @@ CREATE TABLE `temas` (
 
 LOCK TABLES `temas` WRITE;
 /*!40000 ALTER TABLE `temas` DISABLE KEYS */;
-INSERT INTO `temas` VALUES (1,2,31,'Games of Thrones',4,'La historia de CanciÃ³n de Hielo y Fuego se sitÃºa en un mundo ficticio medieval. Hay tres lÃ­neas argumentales en la serie: la crÃ³nica de la guerra civil dinÃ¡stica por el control de Poniente entre varias familias nobles; la creciente amenaza de los Otros, apenas contenida por un inmenso muro de hielo que protege el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada del rey que fue asesinado en otra guerra civil hace quince aÃ±os, quien busca regresar a Poniente a reclamar sus derechos.',2014,'2014-05-22 09:05:06','',NULL,'',' HDTV',0);
+INSERT INTO `temas` VALUES (1,2,31,'Games of Thrones',4,'La historia de CanciÃ³n de Hielo y Fuego se sitÃºa en un mundo ficticio medieval. Hay tres lÃ­neas argumentales en la serie: la crÃ³nica de la guerra civil dinÃ¡stica por el control de Poniente entre varias familias nobles; la creciente amenaza de los Otros, apenas contenida por un inmenso muro de hielo que protege el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada del rey que fue asesinado en otra guerra civil hace quince aÃ±os, quien busca regresar a Poniente a reclamar sus derechos.',2014,'2014-05-23 19:05:42','',NULL,'',' HDTV',0,NULL),(4,1,31,'24',1,'fdfdsfds',2004,'2014-05-23 01:05:31','www.gsf',NULL,'www.ggfg','dvd',0,NULL);
 /*!40000 ALTER TABLE `temas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,7 +289,7 @@ CREATE TABLE `urls` (
   KEY `fk_urls_servidores1_idx` (`idservidores`),
   CONSTRAINT `fk_urls_articulos1` FOREIGN KEY (`idarticulos`) REFERENCES `articulos` (`idarticulos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_urls_servidores1` FOREIGN KEY (`idservidores`) REFERENCES `servidores` (`idservidores`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -292,6 +298,7 @@ CREATE TABLE `urls` (
 
 LOCK TABLES `urls` WRITE;
 /*!40000 ALTER TABLE `urls` DISABLE KEYS */;
+INSERT INTO `urls` VALUES (1,7,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(2,7,2,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(3,7,3,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(4,7,4,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(5,7,13,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(20,3,1,'http://www.mejorenvo.com/descargar.php?t=series&id=31284&torrent=1'),(21,4,3,'http://www.google.com'),(23,1,1,'vbv');
 /*!40000 ALTER TABLE `urls` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,14 +311,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `idusuarios` bigint(19) unsigned NOT NULL AUTO_INCREMENT,
-  `idtipousuarios` bigint(19) unsigned NOT NULL DEFAULT '3',
+  `idtipousuarios` bigint(19) unsigned NOT NULL,
   `nombre` varchar(90) NOT NULL,
   `usuario` varchar(30) NOT NULL,
   `email` varchar(150) NOT NULL,
   `passwd` varchar(260) NOT NULL,
   `fecnac` date NOT NULL,
-  `sexo` enum('Mujer','Hombre','Otro') NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `sexo` enum('Mujer','Hombre','Otros') NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idusuarios`),
   UNIQUE KEY `usuario_UNIQUE` (`usuario`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -339,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-22 18:13:24
+-- Dump completed on 2014-05-23 13:17:37

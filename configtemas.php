@@ -23,6 +23,9 @@ if ($operacion==0){//borra
 	$sql = "DELETE FROM puntajes WHERE idtemas = '$eli_id'";
 	$rs = $conn->query($sql);
 
+	$sql = "DELETE FROM urls WHERE idtemas = '$eli_id'";
+	$rs = $conn->query($sql);
+
 	if($conn->affected_rows > 0){
 		$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Registro Eliminado!</strong> El tema $eli_nombre fue eliminado exitosamente.</div>";
 
@@ -62,7 +65,7 @@ if ($operacion==0){//borra
 	$sql="UPDATE puntajes SET puntaje='$puntaje' WHERE idtemas='$idtemas' and idusuarios='".$_SESSION['idusuarios']."'";
 	$rs = $conn->query($sql);
 
-	if($conn->affected_rows > 0){
+	if($conn->affected_rows >= 0){
 		$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El tema $titulo ha sido actualizado exitosamente.</div>";				
 	}else{
 		$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al editar el tema $titulo.</div>";	
@@ -105,6 +108,80 @@ if ($operacion==0){//borra
 	}else{
 		$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al ingresar el tema $titulo.</div>";	
 	}
+}else if ($operacion==3) {//articulo
+	$idtemas=$_POST['idtemas'];
+	$titulo=$_POST['nombre'];
+	$serv=$_POST['servidores'];
+	$url=$_POST['url'];
+	$episodio=$_POST['episodio'];
+
+	$sql="INSERT INTO articulos (idtemas, nombre, episodio, fechahora) VALUES ('$idtemas','$titulo','$episodio','".date("Y-m-d H:m:s")."')";
+	$rs = $conn->query($sql);
+
+	$sql="SELECT MAX(idarticulos) idarticulos FROM articulos";
+	$rs = $conn->query($sql);
+	$row = $rs->fetch_assoc();
+	$i=0;
+	foreach ($serv as $servidorurl) {
+		if (!empty($url[$i])){
+			$sql="INSERT INTO urls (idarticulos, idservidores, url) VALUES ('".$row['idarticulos']."','".$servidorurl."',
+				'".$url[$i]."')";
+$rs = $conn->query($sql);
+}
+$i++;
+}
+
+if($conn->affected_rows > 0){
+	$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El artículo $titulo ha sido creado exitosamente.</div>";				
+}else{
+	$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al ingresar el artículo $titulo.</div>";	
+}
+}else if ($operacion==4) {//edito articulo
+	$id=$_POST['idtemas'];
+	$titulo=$_POST['nombre'];
+	$serv=$_POST['servidores'];
+	$url=$_POST['url'];
+	$episodio=$_POST['episodio'];
+
+	$sql="UPDATE articulos SET titulo='$titulo',episodio='$episodio' WHERE idarticulos='$id'";
+	$rs=$conn->query($sql);
+
+	$sql="DELETE FROM urls WHERE idarticulos='$id'";
+	$rs=$conn->query($sql);
+
+	$i=0;
+	foreach ($serv as $servidorurl) {
+		if (!empty($url[$i])){
+			$sql="INSERT INTO urls (idarticulos, idservidores, url) VALUES ('".$id."','".$servidorurl."',
+				'".$url[$i]."')";
+$rs = $conn->query($sql);
+}
+$i++;
+}
+
+if($conn->affected_rows > 0){
+	$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El artículo $titulo ha sido actualizado exitosamente.</div>";				
+}else{
+	$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al actualizar el artículo $titulo.</div>";	
+}
+
+}else if ($operacion==5) {//eliminar articulo
+	$eli_id = trim($_POST['id']);
+	$eli_nombre = trim($_POST['nombre']);
+
+	$sql = "DELETE FROM urls WHERE idarticulos = '$eli_id' ";
+	$rs = $conn->query($sql);
+
+	$sql = "DELETE FROM articulos WHERE idarticulos = '$eli_id' ";
+	$rs = $conn->query($sql);
+
+
+	if($conn->affected_rows > 0){
+		$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El artículo $titulo ha sido eliminado exitosamente.</div>";				
+	}else{
+		$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al eliminar el artículo $titulo.</div>";	
+	}
+
 }
 echo $general_error;
 ?>
