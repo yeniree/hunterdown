@@ -11,7 +11,7 @@ include("header.php");
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.ajax({  
-			url: "adminusers.php",
+			url: "adminpeliculas.php",
 			success: function(data) {
 				$('#contenido').html(data);
 			}  
@@ -37,9 +37,9 @@ include("header.php");
 	<div class="row">
 		<div class="col-md-3">
 			<ul id="menulateral" class="nav nav-pills nav-stacked">
+				<li class="active"><a href="adminpeliculas.php">Temas</a></li>
 				<li><a href="adminusers.php">Usuarios</a></li>
 				<li><a href="servidores.php">Servidores</a></li>
-				<li><a href="adminpeliculas.php">Temas</a></li>
 				<li><a href="categorias.php">Cetegorías</a></li>
 				<li><a href="generos.php">Generos</a></li>
 			</ul>

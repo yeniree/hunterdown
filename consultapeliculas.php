@@ -14,8 +14,6 @@ if (!empty($usuario)){
 	$row = $rs->fetch_assoc();
 
 	$condicion = " WHERE temas.idusuarios = '".$row['idusuarios']."'";
-}else{
-	$usuario = $_SESSION['user'];
 }
 
 if (!empty($titulo)){
@@ -42,7 +40,8 @@ if (!empty($categoria)){
 	}
 }
 
-if (!$condicion) {$condicion = " WHERE temas.idusuarios = '".$_SESSION['idusuarios']."'";}
+//if (!$condicion) {$condicion = " WHERE temas.idusuarios = '".$_SESSION['idusuarios']."'";}
+if (!$condicion) {$condicion = " WHERE 1=1";}
 
 $sql = "SELECT COUNT(ifnull(articulos.episodio,0)) episodio, temas.*, categorias.nombre
 FROM 
@@ -85,7 +84,7 @@ $rs = $conn->query($sql);
 			echo "<tr>
 			<td>$i</td>
 			<td>".$fila['nombre']."</td>
-			<td>".$_SESSION['user']."</td>
+			<td>".$fila['usuario']."</td>
 			<td>".$fila['titulo']."</td>
 			<td>".$fila['fechahora']."</td>
 			<td>".$fila['formato']."</td>
@@ -98,7 +97,7 @@ $rs = $conn->query($sql);
 				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-remove text-danger toolti" alt="eliminar" data-toggle="tooltip" data-placement="bottom" title="Eliminar tema"></a>
 
 				<?php if ($fila['idcategorias']==2){?>
-				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-save text-info toolti" alt="agregar" data-toggle="tooltip" data-placement="bottom" title="Agregar Articulo"></a>
+				<a href="<?php echo $fila['idtemas']; ?>" class="glyphicon glyphicon-globe text-info toolti" alt="agregar" data-toggle="tooltip" data-placement="bottom" title="Agregar Articulo"></a>
 				<?php }	?>
 				<?php
 				echo "  </td>

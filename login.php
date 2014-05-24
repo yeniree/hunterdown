@@ -43,16 +43,21 @@ if (isset($_POST['btn-ok'])) {
 		}else{
 			$row = $rs->fetch_assoc();
 
-			if ($row['passwd'] != md5($passwd)) {
-				$passwd_error = mensajeError("Contraseña incorrecta");
+			if($row['status']==0){
+				$passwd_error = mensajeError("Usuario Inactivo, contacte al administrador.");
 			}else{
-				session_start();
-				$_SESSION['user'] = $row['usuario'];
-				$_SESSION['nombre'] = $row['nombre'];
-				$_SESSION['email'] = $row['email'];
-				$_SESSION['tipo_usu'] = $row['idtipousuarios'];
-				$_SESSION['idusuarios'] = $row['idusuarios'];
-				header("location: index.php");
+
+				if ($row['passwd'] != md5($passwd)) {
+					$passwd_error = mensajeError("Contraseña incorrecta");
+				}else{
+					session_start();
+					$_SESSION['user'] = $row['usuario'];
+					$_SESSION['nombre'] = $row['nombre'];
+					$_SESSION['email'] = $row['email'];
+					$_SESSION['tipo_usu'] = $row['idtipousuarios'];
+					$_SESSION['idusuarios'] = $row['idusuarios'];
+					header("location: index.php");
+				}
 			}
 		}
 		$conn->close();

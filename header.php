@@ -152,8 +152,6 @@ if (isset($_GET['cerrarSesion'])) {
 					<div class="collapse navbar-collapse" id="navbar-main">
 						<ul class="nav navbar-nav">
 							<li <?php print($home); ?>><a href="index.php">Inicio</a></li>
-							<li <?php print($peli); ?>><a href="#">Peliculas</a></li>
-							<li <?php print($series); ?>><a href="#">Series</a></li>
 							<?php 
 							if(isset($_SESSION['user'])) {
 								if ($_SESSION['tipo_usu'] == 1) {

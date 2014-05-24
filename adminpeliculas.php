@@ -37,7 +37,7 @@ include_once "funciones.php";
 								</div>
 								<div class="col-md-4">
 									<label>Usuario</label>
-									<input id="usuario" name="usuario" type="text" placeholder="Usuario" value="<?php echo $_SESSION['user'];?>" class="form-control"/>
+									<input id="usuario" name="usuario" type="text" placeholder="Usuario" value="" class="form-control"/>
 								</div>
 								<div class="col-md-4">
 									<label>Título</label>

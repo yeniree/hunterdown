@@ -7,7 +7,7 @@ require "conexion.php";
 <div class="container" style="margin: 70px auto;">
 
 	<?php
-	$sql="SELECT temas.*, categorias.nombre, ifnull(MAX(articulos.episodio),0) capitulo
+	$sql="SELECT temas.*, categorias.idcategorias, ifnull(MAX(articulos.episodio),0) capitulo
 	FROM 
 	temas 
 	INNER JOIN 
@@ -22,25 +22,46 @@ require "conexion.php";
 	$rs = $conn->query($sql);
 	while ($row = $rs->fetch_assoc()) {
 
-		$capitulo=($row['capitulo']==0)?"":", Capitulo ".$row['capitulo'];
+		$capitulo=($row['capitulo']==0)?"":", Capitulo ".$row['capitulo'];		
 
 		echo "<div class='row featurette'>";
 
-		echo "<div class='col-md-7'>";
-		echo "<h2 class='featurette-heading'>".$row['titulo'].". <span class='text-muted'>".$row['temporada']." Temporada ".$capitulo."</span></h2>";
-		echo "<blockquote>";
-		echo "<p>Sinopsis</p>";
-		echo "<footer>".$row['sipnosis']."</footer>";
-		echo "</blockquote>";
-		echo "</div>";
+		if ($row['idcategorias']==1){
 
-		echo "<div class='col-md-5'>";
-		echo "<img class='featurette-image img-responsive' src='img/".$row['imagen']."' alt='".$row['titulo']."'>";
-		echo "</div>";
+			echo "<div class='col-md-7'>";
+			echo "<h2 class='featurette-heading'>".$row['titulo']."</span></h2>";
+			echo "<blockquote>";
+			echo "<p>Sinopsis</p>";
+			echo "<footer>".$row['sipnosis']."</footer>";
+			echo "</blockquote>";
+			echo "</div>";
+
+			echo "<div class='col-md-5'>";
+			echo "<img class='featurette-image img-responsive' src='img/".$row['imagen']."' alt='".$row['titulo']."'>";
+			echo "</div>";
+
+		}else{
+
+
+			echo "<div class='col-md-5'>";
+			echo "<img class='featurette-image img-responsive' src='img/".$row['imagen']."' alt='".$row['titulo']."'>";
+			echo "</div>";
+
+			echo "<div class='col-md-7'>";
+			echo "<h2 class='featurette-heading'>".$row['titulo'].". <span class='text-muted'>".$row['temporada']." Temporada ".$capitulo."</span></h2>";
+			echo "<blockquote>";
+			echo "<p>Sinopsis</p>";
+			echo "<footer>".$row['sipnosis']."</footer>";
+			echo "</blockquote>";
+			echo "</div>";
+
+
+		}
 
 		echo "</div>";
 
 		echo "<hr class='featurette-divider'>";
+
 
 	}
 	?>

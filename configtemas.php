@@ -10,20 +10,9 @@ $operacion = $_POST['operacion'];
 if ($operacion==0){//borra
 	$eli_id = trim($_POST['id']);
 	$eli_nombre = trim($_POST['nombre']);
-
+	
 	$sql = "DELETE FROM temas WHERE idtemas = '$eli_id' ";
-	$rs = $conn->query($sql);
-
-	$sql = "DELETE FROM generostemas WHERE idtemas = '$eli_id'";
-	$rs = $conn->query($sql);
-
-	$sql = "DELETE FROM articulos WHERE idtemas = '$eli_id'";
-	$rs = $conn->query($sql);
-
-	$sql = "DELETE FROM puntajes WHERE idtemas = '$eli_id'";
-	$rs = $conn->query($sql);
-
-	$sql = "DELETE FROM urls WHERE idtemas = '$eli_id'";
+	//echo $sql;
 	$rs = $conn->query($sql);
 
 	if($conn->affected_rows > 0){
@@ -159,13 +148,14 @@ if ($operacion==0){//borra
 			$resultado = @move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);	
 
 			if ($resultado){
-				if ($operacion==1){
+				//if ($operacion==1){
 					$sql="UPDATE temas SET imagen='posters/".$idtemas.".".$type."' WHERE idtemas='".$idtemas."'";
+					//echo $sql;
 					$rs = $conn->query($sql);
 					$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El logo ha sido actualizado exitosamente.</div>";				
-				}
+				//}
 			} else {
-				$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Ha ocurrido un error.</div>";
+				//$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Ha ocurrido un error.</div>";
 			}
 
 		} else {
@@ -187,11 +177,14 @@ if ($operacion==0){//borra
 	$sql="INSERT INTO puntajes (idtemas, idusuarios, puntaje) VALUES ('$idtemas','$idusuarios','$puntaje')";
 	$rs = $conn->query($sql);
 
-	if($conn->affected_rows > 0){
+	/*if($conn->affected_rows > 0){
 		$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El tema $titulo ha sido creado exitosamente.</div>";				
 	}else{
 		$general_error = "<div class='alert alert-danger alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Problemas al ingresar el tema $titulo.</div>";	
-	}
+	}*/
+
+	$general_error = "<div class='alert alert-info alert-dismissable'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong> El tema $titulo ha sido creado exitosamente.</div>";				
+
 }else if ($operacion==3) {//articulo
 	$idtemas=$_POST['idtemas'];
 	$titulo=$_POST['nombre'];
